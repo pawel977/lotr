@@ -8,16 +8,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
-        cmp.HeaderComponent,
         cmp.MainContentComponent,
-        cmp.FooterComponent,
         cmp.PageNotFoundComponent,
         cmp.HomeComponent
     ],
     exports: [
-        cmp.HeaderComponent,
         cmp.MainContentComponent,
-        cmp.FooterComponent,
         cmp.PageNotFoundComponent,
         cmp.HomeComponent
     ],

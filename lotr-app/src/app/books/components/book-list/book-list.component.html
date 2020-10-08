@@ -1,1 +1,8 @@
-<p>book-list works!</p>
+<ng-container>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let book of booksrv.getAllBooksList() | async" 
+    (click)="navigateToDetails(book?._id)" >
+    {{book?.name}}
+    </mat-list-option>
+  </mat-selection-list>
+</ng-container>

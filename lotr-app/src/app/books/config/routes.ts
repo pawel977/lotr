@@ -3,5 +3,11 @@ import * as cmp from '../components';
 
 export const routes: Routes = [
     {
-        path: '', component: cmp.BookListComponent
-    }]
+        path: '', 
+        component: cmp.BookListComponent
+    },
+    {
+        path: 'details',
+        component: cmp.BookItemComponent
+    }
+]
