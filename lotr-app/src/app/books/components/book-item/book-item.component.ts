@@ -17,7 +17,7 @@ export class BookItemComponent implements OnInit {
   }
 
   private getIdOfBook() {
-    this.route.queryParams.subscribe(params => console.log(params))
+    this.route.queryParams.subscribe(params => this.booksSrv.CallChosenBookInformation(params.id))
   }
 
 }

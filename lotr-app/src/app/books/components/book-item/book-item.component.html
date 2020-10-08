@@ -1,3 +1,11 @@
-<ng-container 
+<h3>CHAPTERS</h3>
+<ng-container>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let chapter of booksSrv.getAllChoosenBookChapter() | async" 
+      >
+      {{chapter?.chapterName}}
+      </mat-list-option>
+    </mat-selection-list>
+  </ng-container>
 
->dasda</ng-container>
+

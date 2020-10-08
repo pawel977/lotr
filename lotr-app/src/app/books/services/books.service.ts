@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import * as httpConfig from '../../app-http-config';
 
 @Injectable({
@@ -8,13 +8,13 @@ import * as httpConfig from '../../app-http-config';
 })
 export class BooksService {
   readonly booksGetUrl = httpConfig.http.baseUrl + httpConfig.http.book.get;
-  private bookList$: Subject<any> = new Subject();
-  private choosenBook: Subject<any> = new Subject();
+  private bookList$: BehaviorSubject<any> = new BehaviorSubject([]);
+  private choosenBookChapters$: BehaviorSubject<any> = new BehaviorSubject([]);
   constructor(private http: HttpClient) { }
 
   public callBookList() {
     this.http.get(this.booksGetUrl).subscribe((e: any) => {
-     this.bookList$.next(e && e.docs);
+      this.bookList$.next(e && e.docs);
       console.log('e', e)
     });
   }
@@ -24,8 +24,11 @@ export class BooksService {
   }
 
   public CallChosenBookInformation(id: number) {
-    const url = '' + this.booksGetUrl + `/${id}`
-    this.http.get(url).subscribe(e => console.log('e1', e))
+    const url = '' + this.booksGetUrl + `/${id}/chapter`
+    this.http.get(url).subscribe((e: any) => e && e.docs && this.choosenBookChapters$.next(e.docs))
 
+  }
+  public getAllChoosenBookChapter() {
+    return this.choosenBookChapters$;
   }
 }
