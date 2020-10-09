@@ -1,0 +1,32 @@
+<h3>Szczegóły na temat filmu</h3>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{(details$ | async)?.name}}</mat-card-title>
+    <mat-card-subtitle>czas trwania {{(details$ | async)?.runtimeInMinutes}} min</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <p>
+      Academy award Nominations: {{(details$ | async)?.academyAwardNominations}}
+    </p>
+
+    <p>
+      Academy award wins: {{(details$ | async)?.academyAwardWins}}
+    </p>
+
+    <p>
+      Box office revenue: {{(details$ | async)?.boxOfficeRevenueInMillions}} milions
+    </p>
+
+    <p>
+        Budget: {{(details$ | async)?.budgetInMillions}} milions
+    </p>
+
+    <p>
+        Rotten tomates score: {{(details$ | async)?.rottenTomatesScore}}
+    </p>
+
+
+  </mat-card-content>
+</mat-card>

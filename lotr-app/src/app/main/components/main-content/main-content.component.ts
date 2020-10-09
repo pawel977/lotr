@@ -10,6 +10,7 @@ export class MainContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    localStorage.setItem('token', 'RYVTyTMrrCgRNG0nB5Up');
   }
 
 }

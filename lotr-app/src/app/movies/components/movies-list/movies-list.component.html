@@ -1,0 +1,9 @@
+<h3>Lista Filmów</h3>
+<ng-container>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let movie of movieSrv.getAllMoviesList() | async" 
+      (click)="navigateToDetails(movie?._id)" >
+      {{movie?.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </ng-container>

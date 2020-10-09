@@ -9,5 +9,9 @@ export const routes: Routes = [
     {
     path: 'books',
     loadChildren: () => import('../../books/books.module').then(m => m.BooksModule)
+    },
+    {
+        path: 'movies',
+        loadChildren: () => import('../../movies/movies.module').then(m => m.MoviesModule)
     }
 ]

@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { BaseEntity } from 'src/app/interfaces/base-entity.interface';
+import { Chapter } from 'src/app/interfaces/chapter.interface';
+import { SuccessResponse } from 'src/app/interfaces/success-response.interface';
 import * as httpConfig from '../../app-http-config';
 
 @Injectable({
@@ -8,27 +11,34 @@ import * as httpConfig from '../../app-http-config';
 })
 export class BooksService {
   readonly booksGetUrl = httpConfig.http.baseUrl + httpConfig.http.book.get;
-  private bookList$: BehaviorSubject<any> = new BehaviorSubject([]);
-  private choosenBookChapters$: BehaviorSubject<any> = new BehaviorSubject([]);
+  private bookList$: BehaviorSubject<BaseEntity[]> = new BehaviorSubject([]);
+  private choosenBookChapters$: BehaviorSubject<Chapter[]> = new BehaviorSubject([]);
   constructor(private http: HttpClient) { }
 
-  public callBookList() {
-    this.http.get(this.booksGetUrl).subscribe((e: any) => {
-      this.bookList$.next(e && e.docs);
-      console.log('e', e)
-    });
+  public callBookList(): void {
+    this.http.get<SuccessResponse<BaseEntity[]>>(this.booksGetUrl)
+      .subscribe((e: SuccessResponse<BaseEntity[]>) => {
+        this.bookList$.next(e && e.docs);
+      });
   }
 
-  public getAllBooksList() {
+  public CallChosenBookInformation(id: number): void {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', `Basic ${btoa('RYVTyTMrrCgRNG0nB5Up')}`)
+    }
+
+    const url = '' + this.booksGetUrl + `/${id}/chapter`
+    this.http.get<SuccessResponse<Chapter>>(url, header)
+    .subscribe((e: SuccessResponse<Chapter>) => e && e.docs && this.choosenBookChapters$.next(e.docs))
+
+  }
+
+  public getAllBooksList(): BehaviorSubject<BaseEntity[]> {
     return this.bookList$;
   }
 
-  public CallChosenBookInformation(id: number) {
-    const url = '' + this.booksGetUrl + `/${id}/chapter`
-    this.http.get(url).subscribe((e: any) => e && e.docs && this.choosenBookChapters$.next(e.docs))
 
-  }
-  public getAllChoosenBookChapter() {
+  public getAllChoosenBookChapter(): BehaviorSubject<BaseEntity[]> {
     return this.choosenBookChapters$;
   }
 }

@@ -13,10 +13,10 @@ export class BookItemComponent implements OnInit {
   constructor(public booksSrv: BooksService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getIdOfBook()
+    this.getIdOfBookAndCallService()
   }
 
-  private getIdOfBook() {
+  private getIdOfBookAndCallService() {
     this.route.queryParams.subscribe(params => this.booksSrv.CallChosenBookInformation(params.id))
   }
 
