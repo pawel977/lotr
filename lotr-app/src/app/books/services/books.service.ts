@@ -28,8 +28,8 @@ export class BooksService {
     }
 
     const url = '' + this.booksGetUrl + `/${id}/chapter`
-    this.http.get<SuccessResponse<Chapter>>(url, header)
-    .subscribe((e: SuccessResponse<Chapter>) => e && e.docs && this.choosenBookChapters$.next(e.docs))
+    this.http.get<SuccessResponse<Chapter[]>>(url, header)
+    .subscribe((e: SuccessResponse<Chapter[]>) => e && e.docs && this.choosenBookChapters$.next(e.docs))
 
   }
 
@@ -38,7 +38,7 @@ export class BooksService {
   }
 
 
-  public getAllChoosenBookChapter(): BehaviorSubject<BaseEntity[]> {
+  public getAllChoosenBookChapter(): BehaviorSubject<Chapter[]> {
     return this.choosenBookChapters$;
   }
 }

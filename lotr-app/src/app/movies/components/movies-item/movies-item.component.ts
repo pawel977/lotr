@@ -10,7 +10,7 @@ import { MoviesService } from '../../services/movies.service';
   styleUrls: ['./movies-item.component.scss']
 })
 export class MoviesItemComponent implements OnInit {
-  public details$: Subject<Movie> = new Subject<any>()
+  public details$: BehaviorSubject<Movie> = new BehaviorSubject<Movie>(null)
 
   constructor(private route: ActivatedRoute, public movieSrv: MoviesService) { }
 
